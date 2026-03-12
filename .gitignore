@@ -8,6 +8,7 @@ node_modules/
 **/.cache/
 **/coverage/
 **/logs/
+backend/uploads/
 *.log
 .env
 .env.*
