@@ -1825,6 +1825,60 @@
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
 }
 
+.payment-methods {
+  margin-top: 8px;
+}
+
+.payment-methods h3 {
+  margin: 8px 0 12px;
+  color: #1e293b;
+  font-size: 1.05rem;
+}
+
+.payment-options {
+  display: grid;
+  gap: 12px;
+}
+
+.payment-option {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.payment-option input {
+  margin: 0;
+  accent-color: #667eea;
+}
+
+.payment-label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.payment-note {
+  grid-column: 2;
+  color: #64748b;
+  font-size: 0.86rem;
+}
+
+.payment-option:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 10px 22px rgba(99, 102, 241, 0.15);
+  transform: translateY(-1px);
+}
+
+.payment-option input:checked + .payment-label {
+  color: #4f46e5;
+}
+
 .summary-list {
   max-height: 300px;
   overflow: auto;
@@ -1876,6 +1930,17 @@
   font-weight: 700;
 }
 
+.payment-error-banner {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
 .place-order-btn {
   width: 100%;
   padding: 14px;
@@ -1890,9 +1955,35 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.place-order-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .place-order-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(4, 120, 87, 0.25);
+}
+
+.paypal-panel {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.paypal-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.paypal-hint {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 .checkout-empty {
@@ -1923,6 +2014,36 @@
   color: #ffffff;
   text-decoration: none;
   font-weight: 600;
+}
+
+.payment-status-page {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: radial-gradient(circle at top right, #eef2ff 0%, #f8fafc 45%, #ffffff 100%);
+}
+
+.payment-status-card {
+  max-width: 520px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.payment-status-card h1 {
+  margin: 0 0 10px;
+  color: #0f172a;
+}
+
+.payment-status-card p {
+  margin: 0 0 18px;
+  color: #64748b;
 }
 
 @media (max-width: 768px) {
@@ -2586,5 +2707,86 @@
   .details-card {
     padding: 10px;
   }
+}
+
+/* ===== CLIENT PALETTE OVERRIDES (Option 3) ===== */
+.home-page,
+.cart-page,
+.about-page,
+.contact-page,
+.checkout-page {
+  background: var(--cp-bg);
+}
+
+.hero-banner,
+.cart-header,
+.contact-hero,
+.details-hero,
+.stats-section {
+  background: linear-gradient(135deg, var(--cp-primary), var(--cp-secondary));
+}
+
+.section-header {
+  border-bottom: 3px solid var(--cp-secondary);
+}
+
+.section-header h2::after {
+  background: linear-gradient(90deg, var(--cp-primary), var(--cp-secondary));
+}
+
+.section-header p {
+  color: var(--cp-primary);
+  background: #e5e7eb;
+}
+
+.item-price,
+.continue-shopping-link,
+.detail-icon {
+  color: var(--cp-secondary);
+}
+
+.checkout-left input:focus {
+  border-color: var(--cp-secondary);
+  box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.2);
+}
+
+.payment-option input {
+  accent-color: var(--cp-accent);
+}
+
+.hero-search-btn,
+.continue-shopping-btn,
+.checkout-btn,
+.cta-button,
+.contact-form button,
+.add-to-cart-btn,
+.checkout-back-btn {
+  background: linear-gradient(135deg, var(--cp-primary), var(--cp-secondary));
+  color: #ffffff;
+}
+
+.cta-button,
+.checkout-btn,
+.add-to-cart-btn {
+  box-shadow: 0 6px 20px rgba(17, 24, 39, 0.25);
+}
+
+.author-chip.active {
+  border-color: var(--cp-primary);
+  background: linear-gradient(135deg, var(--cp-primary), var(--cp-secondary));
+}
+
+.author-chip:hover {
+  border-color: var(--cp-secondary);
+  color: var(--cp-primary);
+}
+
+.result-badge {
+  color: var(--cp-primary);
+  background: #e5e7eb;
+}
+
+.modern-no-results button {
+  background: var(--cp-primary);
 }
 

@@ -1,12 +1,19 @@
 /* MODERN NAVBAR */
 
 /* MAIN CONTAINER */
+:root {
+  --navbar-height: 70px;
+}
+
 .navbar {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -19,7 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 70px;
+  height: var(--navbar-height);
   /* position removed since no absolute elements needed */
 }
 
@@ -565,6 +572,10 @@
 }
 
 @media (max-width: 768px) {
+  :root {
+    --navbar-height: 62px;
+  }
+
   .navbar-container {
     padding: 0 15px;
   }
@@ -595,8 +606,12 @@
 }
 
 @media (max-width: 480px) {
+  :root {
+    --navbar-height: 56px;
+  }
+
   .navbar-container {
-    height: 60px;
+    height: var(--navbar-height);
     padding: 0 12px;
   }
 
@@ -948,8 +963,12 @@
 }
 
 @media (max-width: 360px) {
+  :root {
+    --navbar-height: 52px;
+  }
+
   .navbar-container {
-    height: 52px;
+    height: var(--navbar-height);
     padding: 0 6px;
   }
 
@@ -1056,7 +1075,7 @@
 /* unified mobile layer */
 @media (max-width: 767px) {
   .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
   }
 
@@ -1073,7 +1092,7 @@
   }
 
   .mobile-menu.open {
-    max-height: calc(100vh - 56px);
+    max-height: calc(100vh - var(--navbar-height));
     overflow-y: auto;
   }
 
@@ -1153,7 +1172,7 @@
 
 @media (max-width: 430px) {
   .mobile-menu.open {
-    max-height: calc(100vh - 52px);
+    max-height: calc(100vh - var(--navbar-height));
   }
 
   .mobile-search,
@@ -1166,5 +1185,60 @@
   .view-btn {
     min-height: 40px;
   }
+}
+
+/* ===== CLIENT PALETTE OVERRIDES (Option 3) ===== */
+.navbar {
+  background: linear-gradient(135deg, var(--cp-primary), var(--cp-secondary));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.search-btn {
+  background: var(--cp-accent);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+.search-input:focus {
+  box-shadow: 0 6px 25px rgba(16, 185, 129, 0.25);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.login-btn {
+  background: var(--cp-accent);
+}
+
+.register-btn {
+  background: var(--cp-secondary);
+}
+
+.admin-btn {
+  background: var(--cp-secondary);
+  box-shadow: 0 4px 12px rgba(55, 65, 81, 0.35);
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.add-cart-btnn {
+  background: linear-gradient(135deg, var(--cp-accent), #0f766e);
+}
+
+.footer {
+  background: var(--cp-primary);
+}
+
+.footer-col h2,
+.footer-col h3,
+.footer-col a:hover {
+  color: var(--cp-accent);
+}
+
+.footer-bottom {
+  color: #cbd5f5;
 }
 

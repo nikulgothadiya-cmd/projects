@@ -49,6 +49,7 @@ export default function MyOrders() {
             <div className="order-header">
               <p>Order ID: {order._id}</p>
               <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+              <p>Payment: {order.paymentMethod || "Cash on Delivery"}</p>
               <span className={`status ${order.status.toLowerCase()}`}>
                 {order.status}
               </span>

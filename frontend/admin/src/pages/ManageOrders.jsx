@@ -8,6 +8,7 @@ export default function ManageOrders() {
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState(null);
   const [filterStatus, setFilterStatus] = useState("All");
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   const getOrders = async () => {
     try {
@@ -51,6 +52,14 @@ export default function ManageOrders() {
       console.log(err);
       toast.error("Delete failed");
     }
+  };
+
+  const openOrder = (order) => {
+    setSelectedOrder(order);
+  };
+
+  const closeOrder = () => {
+    setSelectedOrder(null);
   };
 
   const filteredOrders = orders.filter(
@@ -143,6 +152,7 @@ export default function ManageOrders() {
                   <th>Customer</th>
                   <th>Contact</th>
                   <th>Items</th>
+                  <th>Payment</th>
                   <th>Total</th>
                   <th>Date</th>
                   <th>Status</th>
@@ -178,6 +188,11 @@ export default function ManageOrders() {
                       </div>
                     </td>
                     <td>
+                      <span className="payment-badge">
+                        {order.paymentMethod || "Cash on Delivery"}
+                      </span>
+                    </td>
+                    <td>
                       <div className="order-total">Rs. {order.totalPrice.toLocaleString()}</div>
                     </td>
                     <td>
@@ -203,6 +218,13 @@ export default function ManageOrders() {
                     <td>
                       <div className="action-buttons">
                         <button
+                          className="view-btn"
+                          onClick={() => openOrder(order)}
+                          title="View Order"
+                        >
+                          View
+                        </button>
+                        <button
                           className="delete-btn"
                           onClick={() => deleteOrder(order._id)}
                           title="Delete Order"
@@ -218,6 +240,90 @@ export default function ManageOrders() {
           </div>
         )}
       </div>
+
+      {selectedOrder && (
+        <div className="order-modal-backdrop" onClick={closeOrder}>
+          <div
+            className="order-modal"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="order-modal-header">
+              <div>
+                <h2>Order Details</h2>
+                <p className="order-modal-subtitle">
+                  Order ID: {selectedOrder._id}
+                </p>
+              </div>
+              <button className="modal-close-btn" onClick={closeOrder}>
+                Close
+              </button>
+            </div>
+
+            <div className="order-modal-body">
+              <div className="order-detail-grid">
+                <div className="detail-card">
+                  <h4>Customer</h4>
+                  <p className="detail-main">{selectedOrder.user?.name || "N/A"}</p>
+                  <p className="detail-sub">{selectedOrder.user?.email || "N/A"}</p>
+                </div>
+                <div className="detail-card">
+                  <h4>Status</h4>
+                  <span
+                    className={`status-badge ${selectedOrder.status.toLowerCase()}`}
+                  >
+                    {selectedOrder.status}
+                  </span>
+                </div>
+                <div className="detail-card">
+                  <h4>Payment</h4>
+                  <p className="detail-main">
+                    {selectedOrder.paymentMethod || "Cash on Delivery"}
+                  </p>
+                </div>
+                <div className="detail-card">
+                  <h4>Order Date</h4>
+                  <p className="detail-main">
+                    {new Date(selectedOrder.createdAt).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+
+              <div className="order-items-section">
+                <div className="order-items-header">
+                  <h3>Items</h3>
+                  <span className="items-count">
+                    {selectedOrder.orderItems.length} items
+                  </span>
+                </div>
+                <div className="order-items-list">
+                  {selectedOrder.orderItems.map((item, idx) => (
+                    <div className="order-item-row" key={`${item._id || item.title}-${idx}`}>
+                      <div className="order-item-info">
+                        <p className="order-item-title">{item.title}</p>
+                        <p className="order-item-meta">
+                          Qty: {item.qty} • Price: Rs. {item.price}
+                        </p>
+                      </div>
+                      <div className="order-item-total">
+                        Rs. {(item.price * item.qty).toLocaleString()}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="order-total-section">
+                <div className="order-total-row">
+                  <span>Total Payable</span>
+                  <strong>Rs. {selectedOrder.totalPrice.toLocaleString()}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -168,6 +168,7 @@ export default function Dashboard() {
               <th>User</th>
               <th>Order Date</th>
               <th>orderItems</th>
+              <th>Payment</th>
               <th>Total</th>
               <th>Status</th>
             </tr>
@@ -185,6 +186,7 @@ export default function Dashboard() {
                     </div>
                   ))}
                 </td>
+                <td>{o.paymentMethod || "Cash on Delivery"}</td>
                 <td>₹{o.totalPrice}</td>
                 <td>
                   <span className={`status ${o.status.toLowerCase()}`}>
@@ -215,5 +217,6 @@ function Card({ icon, title, value, color }) {
     </div>
   );
 }
+
 
 

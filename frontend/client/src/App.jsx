@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import BookDetails from "./pages/BookDetails";
 import Checkout from "./pages/Checkout";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
 import MyOrders from "./pages/MyOrders";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
@@ -22,6 +24,8 @@ export default function App(){
         <Route path="/register" element={<Register/>}/>
         <Route path="/book/:id" element={<BookDetails/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
+        <Route path="/payment/success" element={<PaymentSuccess/>}/>
+        <Route path="/payment/cancel" element={<PaymentCancel/>}/>
         <Route path="/orders" element={<MyOrders/>}/>
         <Route path="/about" element={<AboutUs/>}/>
         <Route path="/contact" element={<ContactUs/>}/>

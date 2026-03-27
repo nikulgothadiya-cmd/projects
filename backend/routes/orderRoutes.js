@@ -56,7 +56,7 @@ router.put("/:id", protect, adminOnly, async (req, res) => {
     const order = await Order.findByIdAndUpdate(
       req.params.id,
       { status: req.body.status },
-      { new: true, runValidators: true }
+      { returnDocument: "after", runValidators: true }
     );
 
     res.json(order);

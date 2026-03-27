@@ -4,8 +4,13 @@ import User from "../models/User.js";
 export const protect = async (req, res, next) => {
   try {
     let token;
-    const appClient = req.headers["x-app-client"];
-    const preferredCookie = appClient === "admin" ? "admin_token" : "client_token";
+    const appClientRaw = req.headers["x-app-client"];
+    const appClient =
+      typeof appClientRaw === "string" && appClientRaw.toLowerCase() === "admin"
+        ? "admin"
+        : "client";
+    const preferredCookie =
+      appClient === "admin" ? "admin_token" : "client_token";
 
     const authHeader = req.headers.authorization;
 
@@ -14,11 +19,11 @@ export const protect = async (req, res, next) => {
     }
 
     if (!token && req.cookies) {
+      // Never allow admin cookies to authenticate client requests (and vice versa).
       token =
         req.cookies[preferredCookie] ||
-        req.cookies.token ||
-        req.cookies.client_token ||
-        req.cookies.admin_token;
+        // Legacy cookie support scoped to the current client only.
+        req.cookies.token;
     }
 
     if (!token) {

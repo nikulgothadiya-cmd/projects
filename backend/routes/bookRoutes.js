@@ -55,7 +55,7 @@ router.put(
     const book = await Book.findByIdAndUpdate(
       req.params.id,
       updatedData,
-      { new: true }
+      { returnDocument: "after" }
     );
 
     res.json(book);

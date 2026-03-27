@@ -1,3 +1,15 @@
+/* Client theme variables */
+:root {
+  --cp-primary: #111827;
+  --cp-secondary: #374151;
+  --cp-accent: #10b981;
+  --cp-bg: #f8fafc;
+  --cp-surface: #ffffff;
+  --cp-text: #0b1220;
+  --cp-muted: #6b7280;
+  --cp-border: #e5e7eb;
+}
+
 *,
 *::before,
 *::after {
@@ -16,6 +28,9 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
+  padding-top: var(--navbar-height, 70px);
+  background: var(--cp-bg);
+  color: var(--cp-text);
 }
 
 img,
